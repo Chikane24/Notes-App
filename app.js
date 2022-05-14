@@ -14,7 +14,7 @@ addBtn.addEventListener('click', e => {
     notesObj.push(addText.value);
     localStorage.setItem("notes",JSON.stringify(notesObj));
     addText.value = "";
-    console.log(notesObj);
+    // console.log(notesObj);
     showNotes();
 })
 
@@ -52,7 +52,7 @@ function showNotes(){
 // Function to delete a note
 
 function deleteNote(index){
-    console.log("I am deleting");
+    // console.log("I am deleting");
     let notes = localStorage.getItem("notes");
     if(notes == null){
         notesObj = [];
@@ -64,3 +64,20 @@ function deleteNote(index){
     localStorage.setItem("notes",JSON.stringify(notesObj));
     showNotes();
 }
+
+let search = document.getElementById("searchTxt");
+search.addEventListener('input', function(){
+    // console.log(("Input event fired"));
+    let inputVal = search.value;
+    let noteCards = document.getElementsByClassName("noteCard");
+    Array.from(noteCards).forEach(function(element){
+        let cardTxt = element.getElementsByTagName("p")[0].innerText;
+        if(cardTxt.includes(inputVal))
+        {
+            element.style.display = "block";
+        }
+        else{
+            element.style.display = "none";
+        }
+    })
+})
